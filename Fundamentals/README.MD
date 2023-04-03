@@ -47,7 +47,7 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 
 ### Reading
 - [Bitcoin - Original Paper](https://bitcoin.org/en/bitcoin-paper)
-- [A Graduate Course in Applied Cryptography](https://toc.cryptobook.us/)
+- [A Graduate Course in Applied Cryptography](https://toc.cryptobook.us/) (Companion book to Dan Boneh's Coursera courses below)
 - [Zero to Monero](https://web.getmonero.org/library/Zero-to-Monero-2-0-0.pdf) (first two chapters)
 
 ### Videos
@@ -55,6 +55,7 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - [Dr Christof Paar's Introduction to Cryptography Lectures](https://www.youtube.com/playlist?list=PL2jrku-ebl3H50FiEPr4erSJiJHURM9BX)
 - [UC Berkley's Zero-Knowledge Proofs MOOC](https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=3)
 - [UC Berkley's DEFI MOOC](https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=4)
+- Dan Boneh's Cryptography [I](https://www.coursera.org/learn/crypto) & [II](https://www.coursera.org/learn/crypto2).
 
 
 ## Concepts to Learn, by Subject
