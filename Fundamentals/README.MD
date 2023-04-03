@@ -42,6 +42,7 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - What is the Byzantine General's problem?
 - What is a wallet actually doing?
 
+
 ## Resources
 
 ### Reading
@@ -53,7 +54,7 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - [Professor Gary Gensler MIT Course: Blockchain and Money](https://www.youtube.com/watch?v=EH6vE97qIP4&list=PLUl4u3cNGP63UUkfL0onkxF6MYgVa04Fn)
 - [Dr Christof Paar's Introduction to Cryptography Lectures](https://www.youtube.com/playlist?list=PL2jrku-ebl3H50FiEPr4erSJiJHURM9BX)
 - [UC Berkley's Zero-Knowledge Proofs MOOC](https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=3)
-- [UC Berkley's DEFI MOOC] (https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=4)
+- [UC Berkley's DEFI MOOC](https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=4)
 
 
 ## Concepts to Learn, by Subject
