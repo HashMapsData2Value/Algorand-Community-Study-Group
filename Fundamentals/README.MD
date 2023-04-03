@@ -45,34 +45,60 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 # Concepts to Learn, by Subject
 
 ## Mathematics
+
 ### Number Theory
-#### Modular Arithmetic
-#### Prime Numbers
-#### Fields and Groups
+- Modular arithmetic
+- Prime numbers
+- Fermat's Little Theorem
+- Euler's Totient function
+- modular inverse
+- Chinese remainder theorem
+- quadratic residues
+- Legendre symbol, Jacobi symbol, Diophantine equations
 
 ### Calculus & Linear Algebra
-#### Polynomials
-#### Vector
-#### Matrix
+- polynomials
+- vectors
+- matrices
 
 ## Cryptography
 
-## Diffie-Helman
+### Symmetric encryption
+- Advanced Encryption Standard (AES)
+- block cipher modes of operation
+- stream ciphers
 
-## Hash Functions
+### Asymmetric encryption: 
+- RSA
+- Diffie-Hellman
+- ElGamal
 
-## Elliptic Curve Cryptography
-### Scalars and Fields
-### Elliptic Curve Arithmetic
-### Pairings
-### Signatures
+### Elliptic curve cryptography
+- elliptic curve arithmetic
+- elliptic curve discrete logarithm problem
+- elliptic curve Diffie-Hellman
+- elliptic curve digital signatures
+- bilinear pairings
+
+### Hash functions
+- SHA-2
+- SHA-3
+- BLAKE2
+- Keccak
+
+### Key derivation functions
+- PBKDF2
+- bcrypt
+- scrypt
+- Argon2
+
+### Multi-party computation
+- secure multi-party computation
+- secret sharing
+- threshold cryptography
+
+### Fully homomorphic encryption
+- encryption schemes that allow computations on encrypted data
 
 ## Blockchain Basics
 - [Gary Gensler MIT Course: Blockchain and Money](https://www.youtube.com/watch?v=EH6vE97qIP4&list=PLUl4u3cNGP63UUkfL0onkxF6MYgVa04Fn)
-
-### What is money?
-### Consensus
-### Nakamoto Consensus (Proof of Work)
-### Pure Proof of Stake
-### Blocks
-### Smart ContractS
