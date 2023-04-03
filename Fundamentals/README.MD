@@ -39,6 +39,7 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - What is zero-knowledge proof, and how is it used in blockchain privacy and security?
 - What is a sharding, and how is it used in blockchain scaling?
 - What is the difference between a UTXO-based blockchain and an account-based blockchain?
+- What is the Byzantine General's problem?
 
 
 # Concepts to Learn, by Subject
