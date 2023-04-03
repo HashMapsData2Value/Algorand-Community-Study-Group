@@ -40,62 +40,34 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - What is a sharding, and how is it used in blockchain scaling?
 - What is the difference between a UTXO-based blockchain and an account-based blockchain?
 - What is the Byzantine General's problem?
+- What is a wallet actually doing?
+
+## Resources
+
+### Reading
+- [Bitcoin - Original Paper](https://bitcoin.org/en/bitcoin-paper)
+- [A Graduate Course in Applied Cryptography](https://toc.cryptobook.us/)
+- [Zero to Monero](https://web.getmonero.org/library/Zero-to-Monero-2-0-0.pdf) (first two chapters)
+
+### Videos
+- [Professor Gary Gensler MIT Course: Blockchain and Money](https://www.youtube.com/watch?v=EH6vE97qIP4&list=PLUl4u3cNGP63UUkfL0onkxF6MYgVa04Fn)
+- [Dr Christof Paar's Introduction to Cryptography Lectures](https://www.youtube.com/playlist?list=PL2jrku-ebl3H50FiEPr4erSJiJHURM9BX)
+- [UC Berkley's Zero-Knowledge Proofs MOOC](https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=3)
+- [UC Berkley's DEFI MOOC] (https://www.youtube.com/@blockchain-web3moocs635/playlists?view=50&sort=dd&shelf_id=4)
 
 
 ## Concepts to Learn, by Subject
 
 ### Mathematics
-
-#### Number Theory
 - Prime numbers
 - Modular arithmetic
 - Fermat's Little Theorem
-- Fields
-- Groups
-
-#### Calculus & Linear Algebra
-- polynomials
-- vectors
-- matrices
+- Fields, Groups
+- Polynomials
+- Vectors, Matrices, Multiplications
 
 ### Cryptography
-
-#### Symmetric encryption
-- Advanced Encryption Standard (AES)
-- block cipher modes of operation
-- stream ciphers
-
-#### Asymmetric encryption: 
-- RSA
-- Diffie-Hellman
-- ElGamal
-
-#### Elliptic curve cryptography
-- elliptic curve arithmetic
-- elliptic curve discrete logarithm problem
-- elliptic curve Diffie-Hellman
-- elliptic curve digital signatures
-- bilinear pairings
-
-#### Hash functions
-- SHA-2
-- SHA-3
-- BLAKE2
-- Keccak
-
-#### Key derivation functions
-- PBKDF2
-- bcrypt
-- scrypt
-- Argon2
-
-#### Multi-party computation
-- secure multi-party computation
-- secret sharing
-- threshold cryptography
-
-#### Fully homomorphic encryption
-- encryption schemes that allow computations on encrypted data
-
-### Blockchain Basics
-- [Gary Gensler MIT Course: Blockchain and Money](https://www.youtube.com/watch?v=EH6vE97qIP4&list=PLUl4u3cNGP63UUkfL0onkxF6MYgVa04Fn)
+- RSA, Diffie-Hellman, ElGamal
+- Elliptic curve cryptography (arithmetic, Diffie-Helman, signatures, pairings)
+- Secure Multi-Party Computation, secret sharing, threshold cryptography, homomorphic encryption
+- Hash functions, Commitment schemes
