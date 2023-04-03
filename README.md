@@ -1,7 +1,7 @@
 # Algorand Community Study Group
 Welcome to the Algorand Community Study Group repository 😊🫶🏿
 
-Please refer to #cryptography-study-group in the Algorand discord server
+Please refer to #cryptography-study-group in [the Algorand discord server](https://discord.com/invite/YgPTCVk).
 
 ## Background
 
