@@ -2,7 +2,7 @@
 
 Start here!
 
-# Diagnostic Questions
+## Diagnostic Questions
 
 Use these questions to gauge yourself and to understand where to improve yourself.
 
@@ -42,63 +42,60 @@ Use these questions to gauge yourself and to understand where to improve yoursel
 - What is the Byzantine General's problem?
 
 
-# Concepts to Learn, by Subject
+## Concepts to Learn, by Subject
 
-## Mathematics
+### Mathematics
 
-### Number Theory
-- Modular arithmetic
+#### Number Theory
 - Prime numbers
+- Modular arithmetic
 - Fermat's Little Theorem
-- Euler's Totient function
-- modular inverse
-- Chinese remainder theorem
-- quadratic residues
-- Legendre symbol, Jacobi symbol, Diophantine equations
+- Fields
+- Groups
 
-### Calculus & Linear Algebra
+#### Calculus & Linear Algebra
 - polynomials
 - vectors
 - matrices
 
-## Cryptography
+### Cryptography
 
-### Symmetric encryption
+#### Symmetric encryption
 - Advanced Encryption Standard (AES)
 - block cipher modes of operation
 - stream ciphers
 
-### Asymmetric encryption: 
+#### Asymmetric encryption: 
 - RSA
 - Diffie-Hellman
 - ElGamal
 
-### Elliptic curve cryptography
+#### Elliptic curve cryptography
 - elliptic curve arithmetic
 - elliptic curve discrete logarithm problem
 - elliptic curve Diffie-Hellman
 - elliptic curve digital signatures
 - bilinear pairings
 
-### Hash functions
+#### Hash functions
 - SHA-2
 - SHA-3
 - BLAKE2
 - Keccak
 
-### Key derivation functions
+#### Key derivation functions
 - PBKDF2
 - bcrypt
 - scrypt
 - Argon2
 
-### Multi-party computation
+#### Multi-party computation
 - secure multi-party computation
 - secret sharing
 - threshold cryptography
 
-### Fully homomorphic encryption
+#### Fully homomorphic encryption
 - encryption schemes that allow computations on encrypted data
 
-## Blockchain Basics
+### Blockchain Basics
 - [Gary Gensler MIT Course: Blockchain and Money](https://www.youtube.com/watch?v=EH6vE97qIP4&list=PLUl4u3cNGP63UUkfL0onkxF6MYgVa04Fn)
