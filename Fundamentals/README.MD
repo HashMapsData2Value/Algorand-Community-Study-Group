@@ -2,7 +2,10 @@
 
 Start here!
 
-# Diagnostic Questions 
+# Diagnostic Questions
+
+Use these questions to gauge yourself and to understand where to improve yourself.
+
 - Can you explain the difference between symmetric and asymmetric encryption? 
 - What is a hash function, and how is it used in blockchain technology?
 - What are the most commonly used cryptographic hash functions in blockchain, and what are their strengths and weaknesses?
