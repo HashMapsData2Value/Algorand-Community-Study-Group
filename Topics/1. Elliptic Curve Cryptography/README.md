@@ -1,6 +1,6 @@
-# 1: Elliptic Curve Cryptography (ECC)
+# 1: Elliptic Curve Cryptography (ECC) \[2023-04-23\]
 
-Our first topic to study is Elliptic Curve Cryptography. 
+Our first topic to study is Elliptic Curve Cryptography. End date: \[2023-04-23\] 
 
 Chapter 15 of Dan Boneh and Victor Shoup's _A Graduate Course in Applied Cryptography_ (version 0.6) will serve as our main material. It's made up of 66 pages of contents and sub-chapters include:
 - 15.1 The group of points on an elliptic curve
