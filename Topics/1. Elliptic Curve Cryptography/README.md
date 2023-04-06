@@ -1,4 +1,4 @@
-# 1: Elliptic Curve Cryptography (ECC)
+# 1: Elliptic Curve Cryptography (ECC) \[2023-04-23\]
 
 Our first topic to study is Elliptic Curve Cryptography. 
 
