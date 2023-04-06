@@ -1,6 +1,3 @@
-# Notes
-
-
 # HashMapsData2Value's Notes
 
 ## 15.0
