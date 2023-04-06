@@ -1,4 +1,4 @@
-# HashMapsData2Value's Notes
+# HashMapsData2Value's Notes for the book
 
 ## 15.0
 
@@ -13,7 +13,7 @@ When we talk about groups the are either additive or multiplicative. These resul
 
 The authors bring up the multiplicative group of integers modulo a sufficiently large prime p. 
 
-Using multiplicative notation, and assuming that g is our generator, we can define the following group: \<g, g^1, g^2, ..., g^(q-1)\> where there are q number of elements. We say that the order of the group is q. If q is a large prime number p we can get some nice security properties (the group becomes "simple", it can't be decomposed into sub groups in non-trivial ways...).
+Using multiplicative notation, and assuming that g is our generator, we can define the following group: \<g, g^1, g^2, ..., g^(q-1)\> where there are q number of elements. We say that the order of the group is q. If q is a large prime number we can get some nice security properties (the group becomes "simple", it can't be decomposed into sub groups in non-trivial ways...).
 
 In additive notation, assuming G is our generator, the group can be defined as \<G, 2G, 3G, ..., (p-1)G>. 
 
@@ -47,4 +47,48 @@ For these assumptions to hold, i.e. that they are "difficult", if we use a "mult
 
 If we instead take a look at elliptic curves, defining our group as elements (point) on that curve, we can get the same assumptions that DL, CDH and DDH are hard, but with much much smaller prime numbers for the same level of security.
 
-You might be familiar with this with your SSH keys when interacting with GitHub. When generating keys you get to choose if you want to use RSA or ed25519. Ed25519 is the name of an elliptic curve, and just so happens to be the one used by Algorand for private and public keys.
+You might be familiar with this with your SSH keys when interacting with GitHub. When generating keys you get to choose if you want to use RSA or ed25519. Ed25519 is the name of a signature scheme that uses the Curve25519, and just so happens to be the one used by Algorand for private and public keys.
+
+
+## 15.1 The group of points of an elliptic curve
+
+How to visualize "the chord" and "tangent" methods ("point addition", "scalar multiplication")? It's easier to understand if you have some kind of visual aid:
+
+- https://www.youtube.com/watch?v=dCvB-mhkT0w
+- https://www.youtube.com/watch?v=9WjyYSn3c8I
+- https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/ (gifs lower in the post)
+
+I wouldn't spend much time memorizing how to actually perform the point addition, unless you want to try implementing it yourself.
+
+Remember that while the curves are often presented for rationals x and y, in the cryptography context the x and y values are members of the scalar field Z_q (integers modulo order q). Thus instead of contiguous, smooth-flowing curves that extend infinitely out into to the sides, our group is defined as individual points along that curve and only for x and y limted from 0 to q.
+
+## 15.2 Elliptic curves over finite fields
+
+The "point at infinity" can be confusing at first. But the idea is that we are dealing with cyclic groups that "loop around" after they fall off the edge of the x or y axis. Because of this it is possible to loop around and end up in the same point you started with.
+
+Say we have a point P, which we add to itself. P+P=2P. This is also known as taking the scalar multiplication, where 2 is the scalar. We could take a scalar k and multiply it like k\*P. At some point, since we are looping around, if you set k at just right value you'll end up back at P.
+
+In additive notation, we can define the point at infinity (or identity element) as O such that  P + O = P. Or O such that P + (-P) = O.
+In multiplicative notation, it would be like having g^a \* g^0 = g^(a+0) = g^a, g^a \* g^(-a) = g^0.
+
+It can help to think of this point as not as a point that actually is generated, but an "artificial" point that has been added to the group to ensure there is an identity element. 
+
+[This stackexchange page](https://crypto.stackexchange.com/questions/70507/in-elliptic-curve-what-does-the-point-at-infinity-look-like) has some good additional explanations of the point at infinity, including how using a different type of representation of the points ("projective coordinates", where the axes are wrapped around a sphere). 
+
+## 15.3 Elliptic curve cryptography
+
+E/F_p is an elliptic curve and E(F_p) is the group of points on the curve defined over F_p. (I.e., take your generator point and then scalar-multiply it with the fields elements in F_p).
+
+"Abelian" group means that the operations of a group are commutative, i.e. that P+Q = Q+P, or g^a \* g^b = g^b \* g^a.
+
+Regarding "insecure curves" - what is being said here is that the finite field for which the field elements are defined on, and the actual order of the group of elliptic points that make up the elliptic curve itself, don't necessarily have to be the same size. In fact, they shouldn't be the same size.
+
+For Ed25519 (Algorand's signature scheme) as an example:
+- Curve equation: −x^2 + y^2 = 1 − (121665/121666) * x^2 * y^2 ("Twisted Edwards curve")
+- There's a base point, B. It can be represented in rational form as (x, 4/5) where x is the positive value of the square root that is set by putting in y = 4/5 in the equation. It's a rational number because Ed25519 is defined over over a Twisted Edwards curve. It can however be encoded over into a prime field with the base points then defined with integer coordinates: (15112221349535400772501151409588531511454012693041857206046113283949847762202, 46316835694926478169428394003475163141307993866256225615783033603165251855960)
+- There's a prime l = 2^252 + 27742317777372353535851937790883648493 which defines the maximum scalar we can use. The x-y canvas axes on which the points are will max out with l, which will also determine how many possible secret keys the curve has (and the strength of that).
+- The total number of points on the curve is however q = 2^255 - 19.
+
+(Here we are using l but in the book they use p. Depending on your resource, p and q will be used in the exact opposite way - sigh.)
+
+Just because the number of points on the curve are q = 2^255 - 19 (number of values that can satisfy the equation) doesn't mean that the base point B will be able to generate all of those points. In fact, there are even some [dangerous points that have very small orders](https://crypto.stackexchange.com/questions/55632/libsodium-x25519-and-ed25519-small-order-check).
