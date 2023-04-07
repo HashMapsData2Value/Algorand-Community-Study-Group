@@ -33,9 +33,9 @@ Let's say you give someone the values g, g^a and g^b, where a and b are integers
 
 In additive notaton, if we have G, A (=a\*G) and B (=b\*G), calculating A\*B (=a\*b\*G) is intractable. And once again, this is different from calculating C = A+B = a\*G + b\*G = (a + b)\*G = c\*G = C.
 
-Note that if we take A + B = C we are in essence doing addition on encrypted values, if we see a and b as cleartexts that have been encrypted, and A and B as their respective ciphertexts. This is sometimes called "homomorphic encryption" and is a very interesting topic we might explore in more detail in the future.
+The only way to calculate g^(ab) (a\*b\*G) is if you have a and g^b (b\*G) (or vice-versa with b and g^a (a\*G)). Then you can treat g^b (b\*G) as a new generator point g_b (B) and simply calculate g_b^a (a\*B).
 
-Finally, the CDH assumption will be revisited when we look at pairings.
+Note that if we take A + B = C we are in essence doing addition on encrypted values, if we see a and b as cleartexts that have been encrypted, and A and B as their respective ciphertexts. This is sometimes called "homomorphic encryption" and is a very interesting topic we might explore in more detail in the future.
 
 #### Decisional Diffie-Helman (DDH) Assumption
 
@@ -92,3 +92,38 @@ For Ed25519 (Algorand's signature scheme) as an example:
 (Here we are using l but in the book they use p. Depending on your resource, p and q will be used in the exact opposite way - sigh.)
 
 Just because the number of points on the curve are q = 2^255 - 19 (number of values that can satisfy the equation) doesn't mean that the base point B will be able to generate all of those points. In fact, there are even some [dangerous points that have very small orders](https://crypto.stackexchange.com/questions/55632/libsodium-x25519-and-ed25519-small-order-check).
+
+
+
+## 15.4 Pairing based cryptography
+
+[Click here](https://www.youtube.com/watch?v=8WDOpzxpnTE) for Dan Boneh's presentation on pairings. Watching i twice, and taking some notes while at it, really helped me understand pairings. (Dan's intro is given by the Foundation's very own Professor Tal Rabin.)
+
+#### DDH and Homomorphic Encryption
+
+For points g (generator for G1) and h (generator for G2) as well as scalars a and b we can define the following equality: e(g^a, h^b) = e(g, h)^(a\*b) = e(g^b, h^a).
+
+To some extent this clashes a little with the DDH assumption, which said that for g^a and g^b it's impossible to connect them to g^ab - unless you have access to the secrets a or b (as a\*g^b = b\*g^a = g^ab). If G1 = G2 (symmetric pairing groups) you can indeed check that e(g^a, g^b) = e(g,g)^(a\*b). But this isn't the case for G1 =/= G2.
+
+Pairings in additive notation (using symmetric pairings), for generator G, a\*G = A and b\*G = B, would be defined as e(a\*G, b\*G) = ab\*e(G, G). This means that if we view A + B = C = (a + b)\*G = c\*G as homomorphic addition between two encrypted values a and b, we can see pairings as allowing us to access a form of homorphic multiplication between encrypted values a and b. (In multiplicative notation replace homomorphic addition with homomorphic multiplicaton, and  homomorphic multiplication with homomorphic exponentiation.)
+
+#### Computation cost
+
+Assume that we have G1 x G2 -> G_T for G1 =/= G2. It is generally the case that operations in G1 are the cheapest, then in G2 and finally in G_T.
+
+This means that if we have g generating G1 and h generating G2, as well as a scalar a, it is the case that even if the following equality holds: e(g^a, h) = e(g, h^a) = e(g, h)^a, each item costs differently.
+
+- e(g^a, h): we evaluate g^a first (operation in G1) and then the pairing.
+- e(g, h^a): we evalute h^a first (operation in G2) and then the pairing.
+- e(g, h)^a: we evalute the pairing first and then take it to ^a (operation in G_T)
+
+Refer [to the AVM opcodes](https://github.com/algorand/go-algorand/pull/4924/files) to get a view of different the opcode costs, e.g. BN254g1 vs BN254g2.
+
+Just something to keep in mind hehe.
+
+#### Pairing Friendly Curves and Algorand
+
+As of the time of writing the go-algorand core Algorand node software is being expanded with code from the golang software package [gnark-crypto](https://github.com/consensys/gnark-crypto/). The pairing friendly curves BN254 and BNS12-381 are being added; [Algorand commissioned an audit](https://github.com/ConsenSys/gnark-crypto/blob/master/audit_oct2022.pdf) into the parts of gnark-crypto that handle these curves.
+
+
+The EVM currently has the [alt_bn128 curve](https://ethereum.github.io/execution-specs/autoapi/ethereum/crypto/index.html) available. It's [BN254 with a different name](https://eips.ethereum.org/EIPS/eip-2494).
