@@ -127,3 +127,51 @@ As of the time of writing the go-algorand core Algorand node software is being e
 
 
 The EVM currently has the [alt_bn128 curve](https://ethereum.github.io/execution-specs/autoapi/ethereum/crypto/index.html) available. It's [BN254 with a different name](https://eips.ethereum.org/EIPS/eip-2494).
+
+## 15.5 Signature schemes from pairings
+
+#### Ed25519 Signature
+
+Before looking at signature schemes from pairings, it can be good to look at the signature scheme used in Algorand: Ed25519. Ed25519 is an "instantiation" of the Edwards-curve Digital Signature Algorithm (EdDSA) digital signature scheme template which uses "a variant of Schnorr signature based on twisted Edwards curves". Specifically, Ed25519 uses SHA512 and Curve25519.
+
+This stuff is covered later in the book but is relevant for our understanding of ECC so might as well bring it up now.
+
+We have the following (additive notation):
+- G <-- a point on the curve that serve as our generator (has x,y coordinates).
+- l <-- a large prime number, order of the base/generator point.
+- a <-- private key (field element part of the finite field, scalar value)
+- A == a\*G (mod l) <-- X is our public key (point on the curve). Public value.
+- h(.) <-- hash function (SHA512), accepts inputs of arbitrary size. h(W||Z) means that we are taking a hash of the bytes of W concatenated with Z.
+- r <-- a randomly generated field element.
+- R == r\*G (mod l) <-- R is a point on the curve.
+- m <-- our message, what we want to sign off on.
+So you start off with a message m you want to sign off with a such that someone can verify it with the public value A.
+
+Start off by randomly generating r. Note that r must be truly random and different each time, or a will be leaked! (Sony Playstation 3 leaked their .
+private key and got hacked making this mistake...).
+
+Calculate s:
+- s == r + h(R||A||m)\*a (mod l)
+(\* is normal multiplication here.)
+
+multiply both sides with G (\* is scalar-multiplication here):
+- s\*G == r\*G + h(R||A||m)\*a\*G (mod l)
+- S == R + h(R||A||m)\*A (mod l)
+
+Now, we present σ = R||s to the world as our signature σ. R and s are both 32 bytes (since we can represent point R with only one coordinate and calculate the other one with the curve equation.). Also, once again, remember that if r is leaked an attacker can calculate a using the scalar modular inverse.
+
+In the Algorand blockchain, A represents your address, a your private key and m e.g. the details of a transaction going from A elsewhere.
+
+A verifier (the other participation nodes) can verify that you actually want to make this transaction (assuming you haven't been hacked) using σ=R||s. How?
+
+Calculate:
+- R + h(R||A||m)\*A (mod l) == S
+- s\*G (mod l) == S'
+
+If S == S' then the signature is valid with overwhelming probability. An adversary would've had to break the discrete log assumption to generate a valid s from S'.
+
+What if r was known however? then:
+
+a == (s - r)\*h(R||A||m)^(-1) (mod l)
+
+Algorand offers the [opcode ed25519_verify](https://developer.algorand.org/docs/get-details/dapps/avm/teal/opcodes/#ed25519verify) (and the "bare" version) for verifying ed25519 signatures in the AVM.
