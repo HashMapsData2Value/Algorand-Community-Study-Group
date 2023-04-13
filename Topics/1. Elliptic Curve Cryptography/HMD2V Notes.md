@@ -175,3 +175,12 @@ What if r was known however? then:
 a == (s - r)\*h(R||A||m)^(-1) (mod l)
 
 Algorand offers the [opcode ed25519_verify](https://developer.algorand.org/docs/get-details/dapps/avm/teal/opcodes/#ed25519verify) (and the "bare" version) for verifying ed25519 signatures in the AVM.
+
+
+#### Hash/Map to a point
+
+The hash functions we are normally used to working with (SHA2, Keccak, MD5, etc) are map some arbitrary input data (bts) into a fixed length, "random", value within a range. I.e., they give you a scalar value.
+
+There is a different type of hash function however which accepts input data and produces a point on the curve directly.
+
+In the [EC Math PR](https://github.com/algorand/go-algorand/pull/4924/files) this upcoming AVM opcode will be called ec_map_to_g, using the Shallue-van de Woestijne (SvdW) method and Simplified Shallue-Woestijne-Ulas (SSWU) method for BN254 and BLS12-381 respectively. LibSodium (the cryptography framework written in C powering much of Algorand) implements this with Elligator2 for curve25519 (crypto_core_ed25519_from_uniform()).
