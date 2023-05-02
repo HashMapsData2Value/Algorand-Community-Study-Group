@@ -172,6 +172,19 @@ As of the time of writing the go-algorand core Algorand node software is being e
 
 The EVM currently has the [alt_bn128 curve](https://ethereum.github.io/execution-specs/autoapi/ethereum/crypto/index.html) available. It's [BN254 with a different name](https://eips.ethereum.org/EIPS/eip-2494).
 
+
+#### The 3 Types/Cassifications of Pairings
+
+Sometimes people will talk about "type 1, type 2, type 3" pairings. They are as follows:
+
+- 1: G_0 = G_1 (symmetric pairing)
+- 2: G_0 =! G_1 but there is an *efficiently computable* homomorphism function that maps from G_1 to G_0.
+- 3: G_0 =! G_1 and there are NO *efficiently computable* homomorphisms between G_1 to G_0. 
+
+#### Group Notations
+
+In the book they use G_0 and G_1 but in other places (e.g. AVM docs, Wikipedia) G_1 and G_2 are used instead for the same groups. G_T is usually always G_T though, for T "target group". 
+
 ## 15.5 Signature schemes from pairings
 
 #### Hash/Map to a point
