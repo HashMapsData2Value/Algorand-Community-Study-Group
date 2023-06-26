@@ -1,0 +1,386 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{Simple}
+
+\usepackage{hyperref}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{amssymb}
+\usepackage{commath} % Align :=
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+% The title
+\title[short title]{Algorand Community Study Group}
+\subtitle{2: L1s, L2s, and alternative blockchains}
+
+\author[HMD2V] {HashMapsData2Value}
+\institute[Algorand] % Your institution may be shorthand to save space
+{
+    % Your institution for the title page
+    Digital Community Champion \\
+    Algorand Foundation \\
+    \vskip 3pt
+}
+\date{\today} % Date, can be changed to a custom date
+
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{frame}
+    % Print the title page as the first slide
+    \titlepage
+\end{frame}
+
+
+\begin{frame}{Welcome!}
+\begin{itemize}
+    \item Welcome!
+    \item Study group? Discord: \href{https://discordapp.com/channels/491256308461207573/1092424979091566622}{\#cryptography-study-group}
+    \item GitHub Repo: \href{https://github.com/HashMapsData2Value/Algorand-Community-Study-Group/tree/main/Topics}{https://github.com/HashMapsData2Value/Algorand-Community-Study-Group}
+    \item Please introduce yourselves
+    \item Topic - L1s, L2s, and alternative blockchains
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Agenda}
+    % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+    \tableofcontents[subsubsectionstyle=hide]
+\end{frame}
+
+\section{Layer 1}
+\subsubsection{What makes up an L1?}
+    \begin{frame}{Anatomy of an L1 - A network of nodes}
+    \begin{itemize}
+        \item Nodes
+        \begin{itemize}
+            \item Block assembly and validation software
+            \item Networking layer, block propagation
+            \item Blockchain history
+        \end{itemize}
+        \item Reach Consensus
+        \begin{itemize}
+            \item Who? Whose block...
+            \item How? PoS, PoW, etc... 
+            \item When? Block speed, finality...
+        \end{itemize}
+        \item Security Model
+        \begin{itemize}
+            \item Collusion and Nakamoto coefficient
+            \item Cost of corruption
+        \end{itemize}
+        \item Abstraction: The World Computer
+        \item Why need more than L1 in the first place?
+    \end{itemize}
+
+\end{frame}
+
+\section{"Alternative" Blockchains}
+\begin{frame}{Section 2}
+    \Huge{\centerline{"Alternative" Blockchains}}
+\end{frame}
+\begin{frame}{Warning}
+    \Huge{\centerline{These definitions are not 100\% set in stone.}}
+\end{frame}
+\subsubsection{Co-Chain}
+\begin{frame}{Co-Chains}
+    \begin{itemize} 
+        \item Separate, basically copy+paste blockchain of an established L1, e.g. Algorand
+        \item I.e. own and independent history, node network, security consideration
+        \item Interoperability: Two-way bridge
+        \item Permissioned vs Non-Permissioned, licensing
+    \end{itemize}
+\end{frame}
+
+\subsubsection{Side-Chain}
+\begin{frame}{Side-Chain}   
+\begin{itemize}
+    \item Separate and independent network of nodes, own security considerations
+    \item BUT! Goal is to assist another L1 from the side
+    \item Validators on side-chain may pay attention to "parent chain" (or vice-versa)
+    \item E.g. Milkomeda C1 (Cardano EVM Sidechain):
+    \begin{itemize}
+        \item Token: mADA, wrap with Milkomeda Bridge
+        \item Has a built-in EVM $ \rightarrow $ Solidity contracts
+        \item Tx on Cardano calls contract on Milkomeda C1
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsubsection{Oracles}
+\begin{frame}{Oracles}
+\begin{itemize}
+    \item Goal: plug off-chain "truth" into on-chain
+    \item Problem: Can't just trust one person's opinion/report
+    \item Solution: "Ask the audience" - decentralized network of nodes, incentivized to reach consensus
+    \item E.g. Goracle servicing Algorand:
+    \begin{itemize}
+        \item Token: GORA 
+        \item Main (on-chain) contract:
+        \begin{enumerate}
+            \item Nodes stake their tokens, register public key
+            \item Consumers request data, subscribe
+        \end{enumerate}
+        \item Off chain: Nodes poll main contract for requests, prepare data in block, PPoS sortition
+        \item Votes for block tallied, data aggregated, presented to consumer 
+        \item Summary: Nodes exist, but token and state is kept on-chain
+    \end{itemize}
+\end{itemize}    
+\end{frame}
+\subsubsection{Bridge Networks}
+\begin{frame}{Bridge Networks}
+\begin{itemize}
+    \item Similar to Oracles - report activity on chain A to chain B
+    \item Bridge components:
+    \begin{itemize}
+        \item "Deposit Box" contract on chain A, takes token X
+        \item "Withdrawal Box" contract on chain B, gives wrapped token X
+        \item Messaging service between the contract
+    \end{itemize}
+    \item How to prove to WB that you deposited X into DB so you can extract the wrapped tokens?
+    \item $\rightarrow$ Rely on \textit{decentralized} network of nodes (with incentives)
+    \item E.g., Portal/Wormhole (Messina.one), Flare
+    \item (Better than "multi-sig"... Is there a better way?)
+\end{itemize}
+    
+\end{frame}
+\subsubsection{"Layer 0s"}
+\begin{frame}{Layer 0s}
+\begin{itemize}
+    \item "Chain of Chains" approach
+    \item Polkadot: Relay Chain + Parachains, bidding for slots
+    \item Cosmos: Cosmos Hub + Zones, customized
+    \item Avalanche: Primary Network Subnet: \textbf{C}ontract Chain + E\textbf{x}change Chain + \textbf{P}latform Chain, + custom subnets
+\end{itemize}
+\end{frame}
+
+\section{Layer 2 solutions}
+\begin{frame}{Section 3}
+    \Huge{\centerline{Layer 2}}
+\end{frame}
+\subsubsection{Channels}
+\begin{frame}{Channels}
+\begin{itemize}
+    \item Open: Lock up funds in multi-sig contract/account/tx, then construct and sign txs off-chain. Many txs can be passed back-and-forth, like ledger of IOUs.
+    \item Close: Final up-to-date settlement tx is broadcast, distributing funds from contract on-chain.
+    \item Multi-sig + timelock
+    \item Simple (Payment), Advanced (State)
+    \item E.g.: Bitcoin's Lightning Network
+    \begin{itemize}
+        \item Network of bidirectional payment channels
+        \item Onion routing
+        \item Cooperative vs Uncooperative Closing
+        \item Dispute period $\rightarrow$ Publish most up-to-date tx
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsubsection{Rollups}
+\begin{frame}{Rollups}
+\begin{itemize}
+    \item Rather than 100 people signing 100 tx requiring 100 signature checks on L1, what if they were all bundled up?
+    \begin{enumerate}
+        \item Send tx to rollup "sequencer" or group of "operators"
+        \item Sequencer pools tx batch and posts to L1
+        \item Rollup "validators" validate batch off-chain
+        \item IF valid, validators post rollup block to L1 with proof
+    \end{enumerate}
+    \item \textit{Crucially}, that proof can be verified \textit{within} the L1! And, transaction data got posted.
+    \item After requesting withdrawal, user posts merkle proof validating inclusion of user's withdrawal tx in verified tx batch.
+    \item Types of proof?
+    \begin{itemize}
+        \item Optimistic Rollups: Fraud Proofs
+        \item ZK Rollups: Validity Proofs
+    \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Optimistic Rollups}
+    \begin{itemize}
+        \item We assume \textit{optimistically} that validators are acting honestly/non-maliciously when posting rollup block. They don't need to \textit{prove} anything, just provide stake.
+        \item If malicious rollup block is posted, as long as there's at least 1 honest node auditing, a fraud proof will be provided as a challenge, the rollup block rejected and the stake lost to that challenger. 
+        \item "Challenge time" means long settlement times! To give adequate time for challengers even with some malicious nodes. One week wait to withdraw funds from L2 contract.
+        \item Optimistic Rollups can incorporate many EVM specs, allowing for sophisticated EVM contracts to be deployed.
+    \end{itemize}
+\end{frame}
+\begin{frame}{ZK Rollups}
+    \begin{itemize}
+        \item Rather than optimistic, pessimistic and suspicious. Requires Zero-Knowledge Proofs of validity, which have their own considerations.
+        \item Allows for very fast finality.
+        \item ZK Rollups good for rolling up simple txs, research topic how to translate EVM opcodes over.
+        \item Considered the "future" of rollups and scaling on e.g. Ethereum.
+    \end{itemize}
+\end{frame}
+\subsubsection{Plasma Chain}
+\begin{frame}{Plasma Chain}
+\begin{itemize}
+    \item Separate blockchain "anchored" to a "root" chain, but executing tx off-chain with own mechanism for block validation. Similar to side-chains but benefit from main chain security.
+    \item Most often just one validation node, settling off-chain then posting merkle root "state commitments" to contract on Ethereum. Contract processes user fund entry/exit.
+    \item Plasma contract accepts \textbf{fraud proofs}, like optimistic rollups, but stores the transaction data off-chain.
+\end{itemize}
+\end{frame}
+\subsubsection{Validium}
+\begin{frame}{Validium}
+\begin{itemize}
+    \item Validiums, like ZK Rollups, post ZKPs (ZK-SNARKs or ZK-STARKs) to a contract on Ethereum. This allows near-instant withdrawals (once ZKP is generated!).
+    \item Unlike ZK Rollups HOWEVER validium contracts do NOT keep tx data on-chain, instead off-chain, saving on cost. If data availability managers withhold off-chain state data from users, users cannot withdraw.
+    \item E.g. StarkWare StarkEx runs in both ZK Rollup or Validium data-availability modes.
+\end{itemize}
+\end{frame}
+
+\subsubsection{Future of Ethereum}
+\begin{frame}{Future of Ethereum}
+\begin{itemize}
+    \item \textit{\href{https://ethereum-magicians.org/t/a-rollup-centric-ethereum-roadmap/4698/1}{A Rollup-centric Ethereum Roadmap}} - Vitalik Buterin's forum post
+    \item "[...] the Ethereum ecosystem is likely to be all-in on rollups (plus some plasma and channels) as a scaling strategy for the near and mid-term future."
+    \item Dank-sharding: "instead of providing more space for transactions, Ethereum sharding provides more space for blobs of data [Ethereum] itself does not attempt to interpret. Verifying a blob simply requires checking that the blob is available - that it can be downloaded from the network. The data space in these blobs"
+\end{itemize}
+\end{frame}
+\subsubsection{Comparison Table}
+\begin{frame}{Comparison Table}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    L2 Name & On-Chain Data? & Fraud Proof? & Validity Proof? \\ 
+\hline
+    Channel &  No & No & No \\
+\hline
+    Optimistic Rollup & Yes & Yes & No \\
+\hline
+    ZK Rollup & Yes & No & Yes \\
+\hline
+    Plasma & No & Yes & No \\ 
+\hline
+    Validium & No & No & Yes \\
+\hline
+\end{tabular}
+\end{frame}
+
+
+
+\section{Algorand}
+\begin{frame}{Section 4}
+    \Huge{\centerline{Algorand}}
+\end{frame}
+\subsubsection{Algorand - pros & cons}
+\begin{frame}{Algorand - pros & cons}
+\begin{itemize}
+    \item Algorand has \textbf{instant settlement finality}, soon 3.3s blocktime and 10k+ TPS 
+    \item PPoS leader selection $\rightarrow$ bottle-neck lies in networking
+    \item Where can L2 come in?
+    \begin{itemize}
+        \item Smart contracts limited by opcode budget
+        \item Application specific L2? (If co-chain "too much".)
+    \end{itemize}
+    \item IMO the real improvements relate to relay nodes and archiving nodes...
+\end{itemize}
+\end{frame}
+
+\subsubsection{Algorand Inc's L2 Research}
+\begin{frame}{Algorand Inc's L2 Research}
+\begin{itemize}
+    \item \href{https://algorand.com/resources/blog/algorand-smart-contract-architecture}{Algorand’s Smart Contract Architecture - "Our Two Tier Architecture", Blog post by Silvio (May 2020)}
+    \item \href{https://www.youtube.com/watch?v=fIRu0FvEUwQ}{Speculative Smart Contracts in the Algorand Blockchain - Victor Luchangco (June 2022)}
+    \item Problem: Accomodating data-intensive and computation-intensive esoteric contracts 
+    \begin{itemize}
+    \item Clarity lang, a "decidable, predictable" language. Smart contracts kept in L2 off-chain but called from L1.
+    \item L2 nodes running PPoS run  batch result of contract calls and collect signatures in compact certificates (state proofs) which can verified in AVM on L1.
+    \end{itemize}
+    \item For now L1's AVM been able to grow very well. No recent update (AFAIK).
+\end{itemize}
+\end{frame}
+
+\subsubsection{Milkomeda AVM Rollup}
+\begin{frame}{Milkomeda AVM Rollup}
+\begin{itemize}
+    \item Brings EVM to Algorand. Wrap Algo $\rightarrow$ mAlgo on Milkomeda A1, with bridge
+    \item Still in development, not yet using BoxStorage but combined tx notes of 16 group tx (16 kb).
+\end{itemize}
+\begin{enumerate}
+    \item Batch Proposal Phase: Sequencer divides batch of txs into groups, create Merkle root of batch. Post Merkle root on-chain to declare "Block Proposal" and initiate next phase.
+    \item Batch Availability Phase: With Merkle root on-chain (in "block 0"), all batch data must be posted within 6 blocks. Tx groups + Merkle proof. If a new proposal is posted it'll be ignored, or if not all the data is posted within 6 blocks it'll be considered invalid. Rollup nodes observe everything, verify the Merkle tree and that the batch is "available".
+    \item Batch Validation Phase: Locally, rollup nodes verify that the transactions (which could be EVM calls) are valid. If they are, the state of the rollup advances a step. Otherwise they do not and state moves back into Batch Proposal.
+\end{enumerate}
+\end{frame}
+\begin{frame}{Milkomeda AVM Rollup}
+\begin{itemize}
+    \item Who gets to be sequencer? Who gets to be validator?
+    \begin{itemize}
+        \item Sequencer and Validator elections using auction to allocate "slots" of blocks on L1 to be sequencer
+        \item Proof of stake with stake locked up in rollup contract, VRF using L1 for randomness seed
+        \item Reward of mAlgo if honest, slashing if dishonest (can tolerate 1/3 malicious)
+        \item Currently in "basic" mode, relying on single centralized sequencer/batcher
+    \end{itemize}
+    \item How to exit? Provide an exit tx signed by 2/3 of the node validators to contract.
+    \item Problem: Algorand cannot verify EVM operations. Thus the L1 cannot be relied on the validate state of rollup.
+    \begin{itemize}
+        \item On-going problem: "The current goal to be implement for the Algorand EVM Rollup is a fraud proof system." \href{https://docs.milkomeda.com/algorand/how-it-works/optimistic-rollup}{Optimistic rollup}, page still under construction.
+    \end{itemize}
+    \item On-going research into BoxStorage
+\end{itemize}
+\end{frame}
+
+\subsubsection{Algorand as Data Availability Layer}
+\begin{frame}{Algorand as Data Availability Layer}
+\begin{itemize}
+    \item \href{https://twitter.com/SebastienGllmt/status/1619451660102938627?s=20}{Tweet by Sebastien Guillemot} (DcSpark, Milkomeda, PaimaStudios) 
+    \item \href{https://github.com/algorand/go-algorand/pull/4924}{AVM EC Math upgrade} - coming soon
+    \item Problem: Storing data off-chain AND verifying it is "still there".
+\end{itemize}    
+Sebastien suggest the following:
+\begin{enumerate}
+    \item Store data in BoxStorage from other chain
+    \item Create (off-chain) KZG commitments of data in BoxStorage
+    \item Wait for state proof, it will verify the successful inclusion of BoxStorage tx
+    \item Take state proof and into other chain
+    \item Some time later...
+    \item Request comes to validate data is this available
+    \item Trigger data availability sampling (randomly sample and check it exists in various places), leveraging KZG commitment scheme
+    \item Validate KZG commitment (pairing check) inside AVM
+    \item Take state proof into other chain
+\end{enumerate}
+\end{frame}
+
+
+\subsubsection{Mixers as L2s?}
+\begin{frame}{Mixers as L2s?}
+\begin{itemize}
+    \item Are mixers L2s? Mixers are a type of "one-shot" L2s.
+    \item Mixer: smart contract that you (along with others) deposit a fixed chunk X of money into from account A. Later, you withdraw that money from account B, using a proof that you are \textit{one of} the depositors, without revealing exactly \textit{who}. Your money is mixed up and obfuscated, granting privacy through plausible deniability.
+    \item When depositing you provide a "commitment" or public key; to withdraw you provide a "nullifier" or "key image". (Merkle Proof ZKP vs Ring Signatures.)
+    \item Wallet Layers:
+    \begin{enumerate}
+        \item First layer is account-based Algorand. You maintain your keys for accounts A and B. 
+        \item Second layer is UTXO-based mixer contract. E.g. 20 000 Algo in 100 Algo increments requires storing 200 withdrawal proofs, allowing 200 transactions.
+    \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\subsubsection{Open discussion}
+\begin{frame}{Open discussion}
+\begin{itemize}
+    \Huge{\centerline{Any other thoughts?}}
+\end{itemize}
+\end{frame}
+
+
+%-------------------------------------------- TEMPLATE!
+
+
+
+
+%------------------------------------------------
+
+\begin{frame}
+    \Huge{\centerline{The End (for now!)}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
